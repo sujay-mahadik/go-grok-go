@@ -21,10 +21,10 @@ logger = logging.getLogger("grok-validator")
 
 app = FastAPI(title="Grok Pattern Validator API")
 
-# Configure CORS
+# Configure CORS - Updated to allow any origin for development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your frontend domain
+    allow_origins=["*"],  # Allow all origins in development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -123,6 +123,10 @@ async def validate_patterns(request: ValidationRequest):
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to Grok Pattern Validator API. Use /api/validate for validating patterns."}
 
 if __name__ == "__main__":
     import uvicorn

@@ -19,9 +19,10 @@ export const validateGrokPatterns = async (
   console.log("Validating patterns:", request);
   
   try {
-    // In production, this would point to your actual FastAPI endpoint
-    // For local development, use http://localhost:8000/api/validate
+    // For development, we set a default API URL if the environment variable isn't set
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/validate';
+    
+    console.log("Using API URL:", apiUrl);
     
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -33,10 +34,12 @@ export const validateGrokPatterns = async (
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error("API Error:", response.status, errorText);
       throw new Error(`API error: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
+    console.log("API Response:", data);
     return data;
   } catch (error) {
     console.error("Error in validateGrokPatterns:", error);
