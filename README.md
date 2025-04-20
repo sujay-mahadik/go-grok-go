@@ -44,7 +44,7 @@ go mod download
 go run main.go
 ```
 
-This will start the Flask API server on port 5000.
+This will start the GO GIN API server on port 8000.
 
 ## How to Use
 
