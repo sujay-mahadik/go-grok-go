@@ -17,7 +17,7 @@ A powerful tool for debugging and testing Grok patterns against log data. This a
 The project consists of two parts:
 
 1. **Frontend**: React application with TypeScript and Tailwind CSS
-2. **Backend**: Python Flask API for Grok pattern validation
+2. **Backend**: Go implementation using gin-gonic and vjeantet/grok libraries
 
 ## Frontend Setup
 
@@ -36,17 +36,12 @@ npm run dev
 
 ## Backend Setup
 
-The backend requires Python 3.7+ and the following packages:
-- flask
-- flask-cors
-- pygrok
-
-To set up the backend:
+Go implementation using go1.24.2 gin-gonic and vjeantet/grok libraries
 
 ```sh
 cd backend
-pip install flask flask-cors pygrok
-python grok_validator.py
+go mod download
+go run main.go
 ```
 
 This will start the Flask API server on port 5000.
