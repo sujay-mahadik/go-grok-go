@@ -130,7 +130,7 @@ const GrokDebugger: React.FC = () => {
     <div className="container mx-auto py-8 max-w-7xl">
       <div className="flex items-center gap-3 mb-8">
         <Code size={32} className="text-elastic-primary" />
-        <h1 className="text-3xl font-bold tracking-tight">Grok Pattern Debugger</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Go Grok Go</h1>
       </div>
       
       <Card className="bg-elastic-dark border-elastic-charcoal mb-6">
