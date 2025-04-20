@@ -12,7 +12,7 @@ const LogInputArea: React.FC<LogInputAreaProps> = ({ logInput, setLogInput }) =>
     <div>
       <Textarea 
         placeholder="Paste your log lines here... Each line will be processed separately."
-        className="min-h-[250px] font-mono text-sm bg-grok-darker border-grok-secondary resize-y"
+        className="min-h-[250px] font-mono text-sm bg-elastic-darker border-elastic-charcoal resize-y"
         value={logInput}
         onChange={(e) => setLogInput(e.target.value)}
       />

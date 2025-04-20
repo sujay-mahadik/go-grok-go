@@ -1,0 +1,5 @@
+
+fastapi==0.108.0
+uvicorn==0.25.0
+pydantic==2.5.3
+pygrok==1.0.0

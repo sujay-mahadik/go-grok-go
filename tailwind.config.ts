@@ -53,13 +53,15 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				grok: {
-					primary: '#845EF7',
-					secondary: '#5D3FD3',
+				elastic: {
+					primary: '#9b87f5',
+					secondary: '#7E69AB',
+					tertiary: '#6E59A5',
 					success: '#3DD68C',
-					error: '#FF5E5B',
-					dark: '#1E1E2E',
-					darker: '#13131A',
+					error: '#ea384c',
+					dark: '#1A1F2C',
+					darker: '#13151c',
+					charcoal: '#403E43',
 					light: '#F8F9FA'
 				}
 			},

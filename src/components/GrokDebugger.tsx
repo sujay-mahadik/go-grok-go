@@ -10,7 +10,7 @@ import { Code, Search, Check, Copy, Settings, Plus, Trash2 } from "lucide-react"
 import LogInputArea from "./LogInputArea";
 import PatternManager from "./PatternManager";
 import ResultsViewer from "./ResultsViewer";
-import { validateGrokPatterns } from "@/lib/api";
+import { validateGrokPatterns, generateLogstashSyntax as generateSyntax } from "@/lib/api";
 
 export type Pattern = {
   id: string;
@@ -59,11 +59,7 @@ const GrokDebugger: React.FC = () => {
     }
 
     const selectedPattern = patterns[0];
-    const syntax = `filter {
-  grok {
-    match => { "message" => "${selectedPattern.pattern}" }
-  }
-}`;
+    const syntax = generateSyntax(selectedPattern.pattern);
     
     setLogstashSyntax(syntax);
     toast({
@@ -136,16 +132,16 @@ const GrokDebugger: React.FC = () => {
   return (
     <div className="container mx-auto py-8 max-w-7xl">
       <div className="flex items-center gap-3 mb-8">
-        <Code size={32} className="text-grok-primary" />
+        <Code size={32} className="text-elastic-primary" />
         <h1 className="text-3xl font-bold tracking-tight">Grok Pattern Debugger</h1>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <Card className="bg-grok-dark border-grok-secondary">
+        <Card className="bg-elastic-dark border-elastic-charcoal">
           <CardContent className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-medium flex items-center gap-2">
-                <Search size={20} className="text-grok-primary" />
+                <Search size={20} className="text-elastic-primary" />
                 Log Input
               </h2>
             </div>
@@ -153,11 +149,11 @@ const GrokDebugger: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="bg-grok-dark border-grok-secondary">
+        <Card className="bg-elastic-dark border-elastic-charcoal">
           <CardContent className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-medium flex items-center gap-2">
-                <Settings size={20} className="text-grok-primary" />
+                <Settings size={20} className="text-elastic-primary" />
                 Pattern Editor
               </h2>
               <Button 
@@ -181,7 +177,7 @@ const GrokDebugger: React.FC = () => {
       
       <div className="flex flex-wrap gap-4 mb-6">
         <Button 
-          className="bg-grok-primary hover:bg-grok-secondary text-white gap-2"
+          className="bg-elastic-primary hover:bg-elastic-secondary text-white gap-2"
           onClick={validatePatterns}
           disabled={isValidating}
         >
@@ -211,10 +207,10 @@ const GrokDebugger: React.FC = () => {
       </div>
       
       {logstashSyntax && (
-        <Card className="mb-6 bg-grok-dark border-grok-secondary">
+        <Card className="mb-6 bg-elastic-dark border-elastic-charcoal">
           <CardContent className="p-6">
             <h3 className="text-lg font-medium mb-2">Logstash Syntax</h3>
-            <pre className="bg-grok-darker p-4 rounded-md overflow-x-auto text-sm">
+            <pre className="bg-elastic-darker p-4 rounded-md overflow-x-auto text-sm">
               {logstashSyntax}
             </pre>
           </CardContent>
@@ -222,10 +218,10 @@ const GrokDebugger: React.FC = () => {
       )}
       
       {results.length > 0 && (
-        <Card className="bg-grok-dark border-grok-secondary">
+        <Card className="bg-elastic-dark border-elastic-charcoal">
           <CardContent className="p-6">
             <h2 className="text-xl font-medium flex items-center gap-2 mb-4">
-              <Check size={20} className="text-grok-success" />
+              <Check size={20} className="text-elastic-success" />
               Validation Results
             </h2>
             <Tabs defaultValue="structured">
@@ -237,7 +233,7 @@ const GrokDebugger: React.FC = () => {
                 <ResultsViewer results={results} />
               </TabsContent>
               <TabsContent value="raw">
-                <pre className="bg-grok-darker p-4 rounded-md overflow-x-auto text-sm h-[400px] overflow-y-auto">
+                <pre className="bg-elastic-darker p-4 rounded-md overflow-x-auto text-sm h-[400px] overflow-y-auto">
                   {JSON.stringify(results, null, 2)}
                 </pre>
               </TabsContent>

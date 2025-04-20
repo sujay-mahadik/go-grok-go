@@ -20,11 +20,11 @@ const PatternManager: React.FC<PatternManagerProps> = ({
   return (
     <div className="space-y-4">
       {patterns.map((pattern) => (
-        <div key={pattern.id} className="space-y-3 pb-4 border-b border-grok-secondary last:border-b-0 last:pb-0">
+        <div key={pattern.id} className="space-y-3 pb-4 border-b border-elastic-charcoal last:border-b-0 last:pb-0">
           <div className="flex items-center gap-2">
             <Input
               placeholder="Pattern name"
-              className="flex-1 bg-grok-darker border-grok-secondary"
+              className="flex-1 bg-elastic-dark border-elastic-charcoal"
               value={pattern.name}
               onChange={(e) => onUpdatePattern({ ...pattern, name: e.target.value })}
             />
@@ -41,18 +41,18 @@ const PatternManager: React.FC<PatternManagerProps> = ({
           </div>
           <Textarea
             placeholder="%{PATTERN_NAME:field_name} %{ANOTHER_PATTERN:another_field}"
-            className="font-mono text-sm bg-grok-darker border-grok-secondary"
+            className="font-mono text-sm bg-elastic-dark border-elastic-charcoal"
             value={pattern.pattern}
             onChange={(e) => onUpdatePattern({ ...pattern, pattern: e.target.value })}
             rows={3}
           />
           <div className="text-xs text-muted-foreground">
             <span>Example patterns: </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{TIMESTAMP_ISO8601:timestamp}"}</code>
+            <code className="px-1 py-0.5 rounded bg-elastic-charcoal">{"%" + "{TIMESTAMP_ISO8601:timestamp}"}</code>
             <span>, </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{IP:client_ip}"}</code>
+            <code className="px-1 py-0.5 rounded bg-elastic-charcoal">{"%" + "{IP:client_ip}"}</code>
             <span>, </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{LOGLEVEL:log_level}"}</code>
+            <code className="px-1 py-0.5 rounded bg-elastic-charcoal">{"%" + "{LOGLEVEL:log_level}"}</code>
           </div>
         </div>
       ))}
