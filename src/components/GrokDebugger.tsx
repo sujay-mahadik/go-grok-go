@@ -27,9 +27,7 @@ export type ParsedResult = {
 const GrokDebugger: React.FC = () => {
   const { toast } = useToast();
   const [logInput, setLogInput] = useState<string>('');
-  const [patterns, setPatterns] = useState<Pattern[]>([
-    { id: '1', name: 'Default Pattern', pattern: '%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:log_level} %{GREEDYDATA:message}' },
-  ]);
+  const [patterns, setPatterns] = useState<Pattern[]>([]);
   const [results, setResults] = useState<ParsedResult[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [logstashSyntax, setLogstashSyntax] = useState<string>('');
@@ -164,11 +162,17 @@ const GrokDebugger: React.FC = () => {
               Add Pattern
             </Button>
           </div>
-          <PatternManager 
-            patterns={patterns} 
-            onUpdatePattern={handleUpdatePattern} 
-            onRemovePattern={handleRemovePattern} 
-          />
+          {patterns.length === 0 ? (
+            <div className="text-center text-muted-foreground py-4">
+              No patterns added. Click "Add Pattern" to get started.
+            </div>
+          ) : (
+            <PatternManager 
+              patterns={patterns} 
+              onUpdatePattern={handleUpdatePattern} 
+              onRemovePattern={handleRemovePattern} 
+            />
+          )}
         </CardContent>
       </Card>
       
