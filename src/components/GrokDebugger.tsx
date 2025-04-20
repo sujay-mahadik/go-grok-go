@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -136,44 +135,42 @@ const GrokDebugger: React.FC = () => {
         <h1 className="text-3xl font-bold tracking-tight">Grok Pattern Debugger</h1>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <Card className="bg-elastic-dark border-elastic-charcoal">
-          <CardContent className="p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-medium flex items-center gap-2">
-                <Search size={20} className="text-elastic-primary" />
-                Log Input
-              </h2>
-            </div>
-            <LogInputArea logInput={logInput} setLogInput={setLogInput} />
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-elastic-dark border-elastic-charcoal">
-          <CardContent className="p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-medium flex items-center gap-2">
-                <Settings size={20} className="text-elastic-primary" />
-                Pattern Editor
-              </h2>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-1"
-                onClick={handleAddPattern}
-              >
-                <Plus size={16} />
-                Add Pattern
-              </Button>
-            </div>
-            <PatternManager 
-              patterns={patterns} 
-              onUpdatePattern={handleUpdatePattern} 
-              onRemovePattern={handleRemovePattern} 
-            />
-          </CardContent>
-        </Card>
-      </div>
+      <Card className="bg-elastic-dark border-elastic-charcoal mb-6">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-medium flex items-center gap-2">
+              <Search size={20} className="text-elastic-primary" />
+              Log Input
+            </h2>
+          </div>
+          <LogInputArea logInput={logInput} setLogInput={setLogInput} />
+        </CardContent>
+      </Card>
+      
+      <Card className="bg-elastic-dark border-elastic-charcoal mb-6">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-medium flex items-center gap-2">
+              <Settings size={20} className="text-elastic-primary" />
+              Pattern Editor
+            </h2>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="gap-1"
+              onClick={handleAddPattern}
+            >
+              <Plus size={16} />
+              Add Pattern
+            </Button>
+          </div>
+          <PatternManager 
+            patterns={patterns} 
+            onUpdatePattern={handleUpdatePattern} 
+            onRemovePattern={handleRemovePattern} 
+          />
+        </CardContent>
+      </Card>
       
       <div className="flex flex-wrap gap-4 mb-6">
         <Button 

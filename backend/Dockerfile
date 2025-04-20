@@ -1,17 +1,23 @@
 
-FROM python:3.11-slim
+FROM golang:1.21-alpine
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install build dependencies
+RUN apk add --no-cache gcc musl-dev
 
+# Copy go mod files
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
 COPY . .
 
-# Make sure the API is accessible from outside the container
-ENV HOST=0.0.0.0
-ENV PORT=8000
+# Build the application
+RUN go build -o main .
 
+# Expose port
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the application
+CMD ["./main"]
