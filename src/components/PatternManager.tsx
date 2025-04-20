@@ -48,11 +48,11 @@ const PatternManager: React.FC<PatternManagerProps> = ({
           />
           <div className="text-xs text-muted-foreground">
             <span>Example patterns: </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">%{TIMESTAMP_ISO8601:timestamp}</code>
+            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{TIMESTAMP_ISO8601:timestamp}"}</code>
             <span>, </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">%{IP:client_ip}</code>
+            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{IP:client_ip}"}</code>
             <span>, </span>
-            <code className="px-1 py-0.5 rounded bg-grok-secondary">%{LOGLEVEL:log_level}</code>
+            <code className="px-1 py-0.5 rounded bg-grok-secondary">{"%" + "{LOGLEVEL:log_level}"}</code>
           </div>
         </div>
       ))}
