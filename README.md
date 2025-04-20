@@ -1,73 +1,87 @@
-# Welcome to your Lovable project
 
-## Project info
+# Grok Pattern Debugger
 
-**URL**: https://lovable.dev/projects/0f54a566-7857-487f-85dd-4ccdd413911f
+A powerful tool for debugging and testing Grok patterns against log data. This application helps developers and system administrators to validate Grok patterns used in log parsing tools like Logstash, Fluentd, and others.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Interactive log input area
+- Pattern management (add, edit, delete patterns)
+- Real-time pattern validation
+- Visualized parsed output
+- Logstash syntax generation
+- Pattern testing against sample logs
 
-**Use Lovable**
+## Project Structure
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0f54a566-7857-487f-85dd-4ccdd413911f) and start prompting.
+The project consists of two parts:
 
-Changes made via Lovable will be committed automatically to this repo.
+1. **Frontend**: React application with TypeScript and Tailwind CSS
+2. **Backend**: Python Flask API for Grok pattern validation
 
-**Use your preferred IDE**
+## Frontend Setup
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The frontend is built with:
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+To run the frontend:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Backend Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The backend requires Python 3.7+ and the following packages:
+- flask
+- flask-cors
+- pygrok
 
-**Use GitHub Codespaces**
+To set up the backend:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+cd backend
+pip install flask flask-cors pygrok
+python grok_validator.py
+```
 
-## What technologies are used for this project?
+This will start the Flask API server on port 5000.
 
-This project is built with:
+## How to Use
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Enter your log lines in the "Log Input" section
+2. Define your Grok patterns in the "Pattern Editor"
+3. Click "Validate Patterns" to test your patterns against the log lines
+4. View the parsed results in the "Validation Results" section
+5. Generate Logstash-compatible syntax using the "Generate Logstash Syntax" button
 
-## How can I deploy this project?
+## Common Grok Patterns
 
-Simply open [Lovable](https://lovable.dev/projects/0f54a566-7857-487f-85dd-4ccdd413911f) and click on Share -> Publish.
+Here are some commonly used Grok patterns:
 
-## Can I connect a custom domain to my Lovable project?
+- `%{TIMESTAMP_ISO8601:timestamp}` - Matches ISO8601 timestamps
+- `%{LOGLEVEL:log_level}` - Matches common log levels (INFO, WARN, ERROR, etc.)
+- `%{IP:client_ip}` - Matches IPv4 addresses
+- `%{GREEDYDATA:message}` - Matches any remaining text
 
-Yes, you can!
+## Example
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Input log line:
+```
+2023-04-15T12:34:56.789Z INFO [app-name] Request from 192.168.1.1 processed successfully
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Grok pattern:
+```
+%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:log_level} \[%{WORD:app_name}\] %{GREEDYDATA:message}
+```
+
+This would parse the log line into:
+- timestamp: `2023-04-15T12:34:56.789Z`
+- log_level: `INFO`
+- app_name: `app-name`
+- message: `Request from 192.168.1.1 processed successfully`
